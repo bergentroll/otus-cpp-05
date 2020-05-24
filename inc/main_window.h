@@ -1,11 +1,22 @@
-#ifndef TINTENLANDSCHAFT_UBERSBENUTZERSCHNITTSTELLE_H
-#define TINTENLANDSCHAFT_UBERSBENUTZERSCHNITTSTELLE_H
+#ifndef TINTENLANDSCHAFT_MAIN_WINDOW_H
+#define TINTENLANDSCHAFT_MAIN_WINDOW_H
 
 #include <iostream>
 #include <string>
 
+#include "sketch.h"
+#include "shape.h"
+
 namespace tintenschaft {
   class Canvas {
+  public:
+    Sketch &getSketch() { return sketch; }
+
+    void setBackgroundColor(Color color) { backgroundColor = color; }
+
+  private:
+    Sketch sketch { };
+    Color backgroundColor { colors::WHITE };
   };
 
   class Window {

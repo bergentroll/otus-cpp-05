@@ -1,5 +1,4 @@
-#include "view.h"
-#include "controller.h"
+#include "main_window.h"
 
 using namespace tintenschaft;
 
@@ -9,9 +8,11 @@ int main() {
 
   auto &canvas { mainWindow.getCanvas() };
 
-  auto &doc { canvas.createScetch("Mono Liza") };
-  canvas.setBackgroundColor(Color(Color::WHITE));
+  auto &doc { canvas.getSketch() };
+  doc.newFile("Mono Lisa.svg");
+
+  canvas.setBackgroundColor(Color(colors::WHITE));
   canvas.addShape(Circle, { Dot(100, 100), 75, Color(Color::BLACK));
 
-  doc.saveScetch("export.file");
+  doc.saveFile();
 }

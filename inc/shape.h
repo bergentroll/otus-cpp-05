@@ -1,10 +1,11 @@
-#ifndef TINTENLANDSCHAFT_UBERSHAPE_H
-#define TINTENLANDSCHAFT_UBERSHAPE_H
+#ifndef TINTENLANDSCHAFT_WUNDERSHAPE_H
+#define TINTENLANDSCHAFT_WUNDERSHAPE_H
 
 #include <cstdint>
 #include <iostream>
 #include <string>
 #include <tuple>
+#include <vector>
 
 namespace tintenschaft {
   using byte = uint8_t;
@@ -99,8 +100,8 @@ namespace tintenschaft {
   class Polyline: public Shape {
     Polyline(
       std::vector<Coordinate> coordinates,
-      strokeColor = colors::BLACK,
-      fillColor = colors::NONE ) {
+      Color strokeColor = colors::BLACK,
+      Color fillColor = colors::NONE ) {
         std::cout << "Construct Polyline with strokeColor ";
     }
   };
