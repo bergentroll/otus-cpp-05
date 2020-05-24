@@ -6,5 +6,5 @@
 
 Документация доступна на <https://bergentroll.github.io/otus-cpp-05/>.
 
-[ ] TODO Observer;
-[ ] TODO CI/CD;
+- TODO Observer;
+- TODO CI/CD;
