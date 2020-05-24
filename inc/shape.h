@@ -10,13 +10,28 @@
 namespace tintenschaft {
   using byte = uint8_t;
 
+  class Color;
+  std::ostream &operator <<(std::ostream &s, Color);
+
   class Color {
   public:
     Color(byte red, byte green, byte blue, byte alpha = 255):
-    red(red), green(green), blue(blue), alpha(alpha) { }
+    red(red), green(green), blue(blue), alpha(alpha) {
+      std::cout << "Construct color " << *this << " by integer values" << std::endl;
+    }
 
     Color(std::string htmlCode, byte alpha = 255): alpha(alpha) {
+      std::cout << "Construct color " << *this << " by HTML code" << std::endl;
       std::tie(red, green, blue) = html2int(htmlCode);
+    }
+
+    operator std::string() {
+      return std::string(
+        "RGBA(" +
+        std::to_string(red) + ", " +
+        std::to_string(green) + ", " +
+        std::to_string(blue) + ", " +
+        std::to_string(alpha) + ')');
     }
 
   private:
@@ -32,6 +47,11 @@ namespace tintenschaft {
     }
   };
 
+  std::ostream &operator <<(std::ostream &s, Color color) {
+    s << std::string(color);
+    return s;
+  }
+
   namespace colors {
     Color
       NONE { 0, 0, 0, 0 },
@@ -46,20 +66,25 @@ namespace tintenschaft {
 
   class Shape {
   public:
-    virtual ~Shape() { };
+    virtual ~Shape() {
+      std::cout << "Destruct Shape" << std::endl;
+    };
     virtual void show() = 0;
 
     virtual void setStrokeColor(Color color) {
+      std::cout << "Setting shape stroke color to " << color << std::endl;
       strokeColor = color;
       // TODO notify
     }
 
     void setStrokeWidth(unsigned int widthPX) {
+      std::cout << "Setting shape stroke width to " << widthPX << std::endl;
       strokeWidth = widthPX;
       // TODO notify
     }
 
     void setFillColor(Color color) {
+      std::cout << "Setting shape fill color to " << color << std::endl;
       fillColor = color;
       // TODO notify
     }
@@ -75,7 +100,7 @@ namespace tintenschaft {
     Dot(
       Coordinate coordinate,
       Color strokeColor = colors::BLACK) {
-        std::cout << "Construct Dot with strokeColor ";
+        std::cout << "Construct Dot with strokeColor " << strokeColor << std::endl;
     }
 
     virtual void show() override { }
@@ -88,7 +113,7 @@ namespace tintenschaft {
       Coordinate corner2,
       Color strokeColor = colors::BLACK,
       Color fillColor = colors::NONE ) {
-        std::cout << "Construct Rectangle with strokeColor ";
+        std::cout << "Construct Rectangle with strokeColor " << strokeColor << std::endl;
     }
 
     virtual void show() override { }
@@ -101,7 +126,7 @@ namespace tintenschaft {
       Coordinate corner2,
       Color strokeColor = colors::BLACK,
       Color fillColor = colors::NONE ) {
-        std::cout << "Construct Ellipse with strokeColor ";
+        std::cout << "Construct Ellipse with strokeColor " << strokeColor << std::endl;
     }
 
     virtual void show() override { }
@@ -113,7 +138,7 @@ namespace tintenschaft {
       std::vector<Coordinate> coordinates,
       Color strokeColor = colors::BLACK,
       Color fillColor = colors::NONE ) {
-        std::cout << "Construct Polyline with strokeColor ";
+        std::cout << "Construct Polyline with strokeColor " << strokeColor << std::endl;
     }
 
     virtual void show() override { }
