@@ -20,10 +20,11 @@ namespace tintenschaft {
     }
 
   private:
-    byte red;
-    byte green;
-    byte blue;
-    byte alpha;
+    byte
+      red,
+      green,
+      blue,
+      alpha;
 
     std::tuple<byte, byte, byte> html2int(std::string htmlCode) {
       std::cout << "Convert HMTL color code to integer values" << std::endl;
@@ -45,7 +46,7 @@ namespace tintenschaft {
 
   class Shape {
   public:
-    virtual ~Shape() = 0;
+    virtual ~Shape() { };
     virtual void show() = 0;
 
     virtual void setStrokeColor(Color color) {
@@ -70,40 +71,52 @@ namespace tintenschaft {
   };
 
   class Dot: public Shape {
+  public:
     Dot(
       Coordinate coordinate,
       Color strokeColor = colors::BLACK) {
         std::cout << "Construct Dot with strokeColor ";
     }
+
+    virtual void show() override { }
   };
 
   class Rectangle: public Shape {
+  public:
     Rectangle(
-      Coordinate topLeftCorner,
-      Coordinate bottomRightCorner,
+      Coordinate corner1,
+      Coordinate corner2,
       Color strokeColor = colors::BLACK,
       Color fillColor = colors::NONE ) {
         std::cout << "Construct Rectangle with strokeColor ";
     }
+
+    virtual void show() override { }
   };
 
   class Ellipse: public Shape {
+  public:
     Ellipse(
-      Coordinate topLeftCorner,
-      Coordinate bottomRightCorner,
+      Coordinate corner1,
+      Coordinate corner2,
       Color strokeColor = colors::BLACK,
       Color fillColor = colors::NONE ) {
         std::cout << "Construct Ellipse with strokeColor ";
     }
+
+    virtual void show() override { }
   };
 
   class Polyline: public Shape {
+  public:
     Polyline(
       std::vector<Coordinate> coordinates,
       Color strokeColor = colors::BLACK,
       Color fillColor = colors::NONE ) {
         std::cout << "Construct Polyline with strokeColor ";
     }
+
+    virtual void show() override { }
   };
 }
 

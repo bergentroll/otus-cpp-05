@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "main_window.h"
 
 using namespace tintenschaft;
@@ -12,7 +14,9 @@ int main() {
   doc.newFile("Mono Lisa.svg");
 
   canvas.setBackgroundColor(Color(colors::WHITE));
-  canvas.addShape(Circle, { Dot(100, 100), 75, Color(Color::BLACK));
+  std::shared_ptr<Ellipse> ellipse {
+    new Ellipse(Coordinate{20, 20}, Coordinate{80, 80}, colors::BLACK) };
+  canvas.addShape(ellipse);
 
   doc.saveFile();
 }
