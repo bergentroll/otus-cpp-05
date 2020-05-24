@@ -34,3 +34,13 @@ if(DOXYGEN_FOUND)
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Creating HTML documentation with Doxygen" VERBATIM)
 endif()
+
+### Packing ###################################################################
+
+install(TARGETS tintenschaft RUNTIME DESTINATION bin)
+
+set(CPACK_GENERATOR DEB)
+set(CPACK_PACKAGE_CONTACT bergentroll@insiberia.net)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+
+include(CPack)
