@@ -5,7 +5,7 @@ if($ENV{TRAVIS_BUILD_NUMBER})
 else()
   set(VERSION 0.0.0)
 endif()
-project(editor_model VERSION ${VERSION})
+project(tintenschaft VERSION ${VERSION})
 
 set(CMAKE_CXX_STANDARD 17)
 
