@@ -11,6 +11,14 @@
 #include "shape.h"
 
 namespace tintenschaft {
+  void connect(std::function<void()>, std::function<void()>) {
+    std::cout << "Connect signal" << std::endl;
+  }
+
+  void disconnect(std::function<void()>, std::function<void()>) {
+    std::cout << "Disconnect signal" << std::endl;
+  }
+
   class Widget {
   public:
     virtual void show() = 0;
@@ -18,6 +26,11 @@ namespace tintenschaft {
 
   class Canvas: public Widget {
   public:
+    class UnknownShape: std::runtime_error{
+    public:
+      UnknownShape(std::string const &what): std::runtime_error(what) { }
+    };
+
     Sketch &getSketch() { return sketch; }
 
     void setBackgroundColor(Color color) { backgroundColor = color; }
@@ -29,15 +42,27 @@ namespace tintenschaft {
     unsigned int addShape(std::shared_ptr<Shape> shape) {
       std::cout << "Add Shape to Canvas" << std::endl;
       shapes[currentUid] = shape;
+      connect(
+        std::bind(&Shape::changeSignal, shape.get()),
+        std::bind(&Canvas::onShapeChangeSignal, this));
       shape->show();
       return currentUid++;
     }
 
+    /// @throw Canvas::UnknownShape On uid that is unknown for Canvas.
     void deleteShape(unsigned int uid) {
       std::cout << "Delete Shape with uid " << uid << " from Canvas" << std::endl;
+      try {
+        disconnect(
+          std::bind(&Shape::changeSignal, shapes.at(uid).get()),
+          std::bind(&Canvas::onShapeChangeSignal, this));
+      } catch (std::out_of_range &) {
+        throw (UnknownShape("Shape for deletion is unknown for Canvas"));
+      }
       shapes.erase(uid);
     }
 
+    /// @throw Canvas::UnknownShape On uid that is unknown for Canvas.
     void deleteShape(std::shared_ptr<Shape> shape) {
       auto it {
         std::find_if(
@@ -48,10 +73,16 @@ namespace tintenschaft {
       if (it != shapes.end()) {
       std::cout << "Delete Shape with uid " << it->first << " from Canvas" << std::endl;
         shapes.erase(it);
+        disconnect(
+          std::bind(&Shape::changeSignal, shape.get()),
+          std::bind(&Canvas::onShapeChangeSignal, this));
       } else {
         std::cout << "Failed to delete Shape from Canvas" << std::endl;
+        throw (UnknownShape("Shape for deletion is unknown for Canvas"));
       }
     }
+
+    void onShapeChangeSignal() { }
 
   private:
     Sketch sketch { };
