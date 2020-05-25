@@ -2,6 +2,7 @@
 #define TINTENLANDSCHAFT_MAIN_WINDOW_H
 
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <memory>
 #include <unordered_map>
