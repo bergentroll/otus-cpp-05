@@ -1,0 +1,35 @@
+language: cpp
+dist: bionic
+
+env:
+  - BUILD_TYPE=Release
+
+addons:
+  apt:
+    update: false
+    packages:
+    - doxygen
+    - graphviz
+
+script:
+- set -e
+- cmake --DCMAKE_BUILD_TYPE=${BUILD_TYPE} .
+- cmake --build .
+- cmake --build . --target package
+- cmake --build . --target html
+
+deploy:
+  - provider: bintray
+    skip_cleanup: true
+    file: bintray.json
+    user: bergentroll
+    edge: true
+    on:
+      branch: master
+  - provider: pages
+    github_token: ${GITHUB_TOKEN}
+    skip_cleanup: true
+    keep_history: false
+    local_dir: html
+    on:
+      branch: master
