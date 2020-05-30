@@ -14,9 +14,9 @@ int main() {
   doc.newFile("Mono Lisa.svg");
 
   canvas.setBackgroundColor(Color(colors::WHITE));
-  std::shared_ptr<Ellipse> face { new Ellipse({20, 0}, {80, 100}, colors::BLACK, colors::NONE) };
-  std::shared_ptr<Ellipse> leftEye { new Ellipse({30, 30}, {40, 40}, colors::BLACK, colors::NONE) };
-  std::shared_ptr<Ellipse> rightEye { new Ellipse({60, 30}, {70, 40}, colors::BLACK, colors::NONE) };
+  auto face { Ellipse::create({20, 0}, {80, 100}) };
+  auto leftEye { Ellipse::create({30, 30}, {40, 40}) };
+  auto rightEye { Ellipse::create({60, 30}, {70, 40}) };
 
   canvas.addShape(face);
   canvas.addShape(leftEye);

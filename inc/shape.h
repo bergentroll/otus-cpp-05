@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <iostream>
 #include <string>
+#include <memory>
 #include <tuple>
 #include <vector>
 
@@ -69,6 +70,7 @@ namespace tintenschaft {
     virtual ~Shape() {
       std::cout << "Destruct Shape" << std::endl;
     };
+
     virtual void show() = 0;
 
     virtual void setStrokeColor(Color color) {
@@ -106,14 +108,24 @@ namespace tintenschaft {
     }
 
     Dot(
-      Coordinate coordinate,
-      Color strokeColor) {
-        std::cout
-          << "Construct Dot with strokeColor " << strokeColor << std::endl;
-        Shape::strokeColor = strokeColor;
+        Coordinate coordinate,
+        Color strokeColor) {
+      std::cout
+        << "Construct Dot with strokeColor " << strokeColor << std::endl;
+      Shape::strokeColor = strokeColor;
     }
 
-    virtual void show() override { }
+    static std::shared_ptr<Dot> create(Coordinate coordinate) {
+      return std::make_shared<Dot>(Dot(coordinate));
+    }
+
+    static std::shared_ptr<Dot> create(
+        Coordinate coordinate,
+        Color strokeColor) {
+      return std::make_shared<Dot>(Dot(coordinate, strokeColor));
+    }
+
+    virtual void show() override { std::cout << "Show Dot" << std::endl; }
   };
 
   class Rectangle: public Shape {
@@ -123,18 +135,31 @@ namespace tintenschaft {
     }
 
     Rectangle(
-      Coordinate corner1,
-      Coordinate corner2,
-      Color strokeColor,
-      Color fillColor) {
-        std::cout
-          << "Construct Rectangle with strokeColor " << strokeColor
-          << ", fillColor " << fillColor << std::endl;
-        Shape::strokeColor = strokeColor;
-        Shape::fillColor = fillColor;
+        Coordinate corner1,
+        Coordinate corner2,
+        Color strokeColor,
+        Color fillColor) {
+      std::cout
+        << "Construct Rectangle with strokeColor " << strokeColor
+        << ", fillColor " << fillColor << std::endl;
+      Shape::strokeColor = strokeColor;
+      Shape::fillColor = fillColor;
     }
 
-    virtual void show() override { }
+    static std::shared_ptr<Rectangle> create(Coordinate corner1, Coordinate corner2) {
+      return std::make_shared<Rectangle>(Rectangle(corner1, corner2));
+    }
+
+    static std::shared_ptr<Rectangle> create(
+        Coordinate corner1,
+        Coordinate corner2,
+        Color strokeColor,
+        Color fillColor) {
+      return std::make_shared<Rectangle>(
+        Rectangle(corner1, corner2, strokeColor, fillColor));
+    }
+
+    virtual void show() override { std::cout << "Show Rectangle" << std::endl; }
   };
 
   class Ellipse: public Shape {
@@ -144,18 +169,31 @@ namespace tintenschaft {
     }
 
     Ellipse(
-      Coordinate corner1,
-      Coordinate corner2,
-      Color strokeColor,
-      Color fillColor) {
-        std::cout
-          << "Construct Ellipse with strokeColor " << strokeColor
-          << ", fillColor " << fillColor << std::endl;
-        Shape::strokeColor = strokeColor;
-        Shape::fillColor = fillColor;
+        Coordinate corner1,
+        Coordinate corner2,
+        Color strokeColor,
+        Color fillColor) {
+      std::cout
+        << "Construct Ellipse with strokeColor " << strokeColor
+        << ", fillColor " << fillColor << std::endl;
+      Shape::strokeColor = strokeColor;
+      Shape::fillColor = fillColor;
     }
 
-    virtual void show() override { }
+    static std::shared_ptr<Ellipse> create(Coordinate corner1, Coordinate corner2) {
+      return std::make_shared<Ellipse>(Ellipse(corner1, corner2));
+    }
+
+    static std::shared_ptr<Ellipse> create(
+        Coordinate corner1,
+        Coordinate corner2,
+        Color strokeColor,
+        Color fillColor) {
+      return std::make_shared<Ellipse>(
+        Ellipse(corner1, corner2, strokeColor, fillColor));
+    }
+
+    virtual void show() override { std::cout << "Show Ellipse" << std::endl; }
   };
 
   class Polyline: public Shape {
@@ -165,17 +203,29 @@ namespace tintenschaft {
     }
 
     Polyline(
-      std::vector<Coordinate> coordinates,
-      Color strokeColor,
-      Color fillColor) {
-        std::cout
-          << "Construct Polyline with strokeColor " << strokeColor
-          << ", fillColor " << fillColor << std::endl;
-        Shape::strokeColor = strokeColor;
-        Shape::fillColor = fillColor;
+        std::vector<Coordinate> coordinates,
+        Color strokeColor,
+        Color fillColor) {
+      std::cout
+        << "Construct Polyline with strokeColor " << strokeColor
+        << ", fillColor " << fillColor << std::endl;
+      Shape::strokeColor = strokeColor;
+      Shape::fillColor = fillColor;
     }
 
-    virtual void show() override { }
+    static std::shared_ptr<Polyline> create(std::vector<Coordinate> coordinates) {
+      return std::make_shared<Polyline>(Polyline(coordinates));
+    }
+
+    static std::shared_ptr<Polyline> create(
+        std::vector<Coordinate> coordinates,
+        Color strokeColor,
+        Color fillColor) {
+      return std::make_shared<Polyline>(
+        Polyline(coordinates, strokeColor, fillColor));
+    }
+
+    virtual void show() override { std::cout << "Show Polyline" << std::endl; }
   };
 }
 
