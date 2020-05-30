@@ -77,19 +77,19 @@ namespace tintenschaft {
       changeSignal();
     }
 
-    void setStrokeWidth(unsigned int widthPX) {
+    virtual void setStrokeWidth(unsigned int widthPX) {
       std::cout << "Setting shape stroke width to " << widthPX << std::endl;
       strokeWidth = widthPX;
       changeSignal();
     }
 
-    void setFillColor(Color color) {
+    virtual void setFillColor(Color color) {
       std::cout << "Setting shape fill color to " << color << std::endl;
       fillColor = color;
       changeSignal();
     }
 
-    void changeSignal() {
+    virtual void changeSignal() {
       std::cout << "Shape has emitted changeSignal";
     }
 
