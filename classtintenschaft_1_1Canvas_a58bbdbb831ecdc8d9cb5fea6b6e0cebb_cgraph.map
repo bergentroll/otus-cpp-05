@@ -1,0 +1,5 @@
+<map id="tintenschaft::Canvas::deleteShape" name="tintenschaft::Canvas::deleteShape">
+<area shape="rect" id="node2" href="$namespacetintenschaft.html#a39d9a91c032ad1a627c7d0c1736db479" title="tintenschaft::disconnect" alt="" coords="209,5,388,32"/>
+<area shape="rect" id="node3" href="$classtintenschaft_1_1Shape.html#ad4061360232c573433e15af299c8d93b" title="tintenschaft::Shape\l::changeSignal" alt="" coords="225,57,373,98"/>
+<area shape="rect" id="node4" href="$classtintenschaft_1_1Canvas.html#a71c19e2f05e26fa355c3236a59571737" title="tintenschaft::Canvas\l::onShapeChangeSignal" alt="" coords="211,122,386,163"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="tintenschaft::Canvas::addShape" name="tintenschaft::Canvas::addShape">
+<area shape="rect" id="node2" href="$namespacetintenschaft.html#a3ffb5774473d2486cced797594a97908" title="tintenschaft::connect" alt="" coords="217,5,376,32"/>
+<area shape="rect" id="node3" href="$classtintenschaft_1_1Shape.html#ad4061360232c573433e15af299c8d93b" title="tintenschaft::Shape\l::changeSignal" alt="" coords="223,57,371,98"/>
+<area shape="rect" id="node4" href="$classtintenschaft_1_1Canvas.html#a71c19e2f05e26fa355c3236a59571737" title="tintenschaft::Canvas\l::onShapeChangeSignal" alt="" coords="209,122,384,163"/>
+</map>
