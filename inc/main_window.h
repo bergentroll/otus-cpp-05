@@ -97,7 +97,7 @@ namespace tintenschaft {
   public:
     MainWindow(): canvas() { }
 
-    MainWindow(std::string title): canvas(),title(title) { }
+    MainWindow(std::string_view title): canvas(), title(title) { }
 
     virtual void show() override {
       std::cout << "Show the MainWindow" << std::endl;
