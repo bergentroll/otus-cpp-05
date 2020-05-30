@@ -22,6 +22,7 @@ namespace tintenschaft {
 
   class Widget {
   public:
+    virtual ~Widget() { }
     virtual void show() = 0;
   };
 
