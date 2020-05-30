@@ -101,10 +101,16 @@ namespace tintenschaft {
 
   class Dot: public Shape {
   public:
+    Dot(Coordinate coordinate) {
+      std::cout << "Construct Dot" << std::endl;
+    }
+
     Dot(
       Coordinate coordinate,
-      Color strokeColor = colors::BLACK) {
-        std::cout << "Construct Dot with strokeColor " << strokeColor << std::endl;
+      Color strokeColor) {
+        std::cout
+          << "Construct Dot with strokeColor " << strokeColor << std::endl;
+        Shape::strokeColor = strokeColor;
     }
 
     virtual void show() override { }
@@ -112,12 +118,20 @@ namespace tintenschaft {
 
   class Rectangle: public Shape {
   public:
+    Rectangle(Coordinate corner1, Coordinate corner2) {
+      std::cout << "Construct Rectangle" << std::endl;
+    }
+
     Rectangle(
       Coordinate corner1,
       Coordinate corner2,
-      Color strokeColor = colors::BLACK,
-      Color fillColor = colors::NONE ) {
-        std::cout << "Construct Rectangle with strokeColor " << strokeColor << std::endl;
+      Color strokeColor,
+      Color fillColor) {
+        std::cout
+          << "Construct Rectangle with strokeColor " << strokeColor
+          << ", fillColor " << fillColor << std::endl;
+        Shape::strokeColor = strokeColor;
+        Shape::fillColor = fillColor;
     }
 
     virtual void show() override { }
@@ -125,12 +139,20 @@ namespace tintenschaft {
 
   class Ellipse: public Shape {
   public:
+    Ellipse(Coordinate corner1, Coordinate corner2) {
+      std::cout << "Construct Ellipse" << std::endl;
+    }
+
     Ellipse(
       Coordinate corner1,
       Coordinate corner2,
-      Color strokeColor = colors::BLACK,
-      Color fillColor = colors::NONE ) {
-        std::cout << "Construct Ellipse with strokeColor " << strokeColor << std::endl;
+      Color strokeColor,
+      Color fillColor) {
+        std::cout
+          << "Construct Ellipse with strokeColor " << strokeColor
+          << ", fillColor " << fillColor << std::endl;
+        Shape::strokeColor = strokeColor;
+        Shape::fillColor = fillColor;
     }
 
     virtual void show() override { }
@@ -138,11 +160,19 @@ namespace tintenschaft {
 
   class Polyline: public Shape {
   public:
+    Polyline(std::vector<Coordinate> coordinates) {
+      std::cout << "Construct Polyline" << std::endl;
+    }
+
     Polyline(
       std::vector<Coordinate> coordinates,
-      Color strokeColor = colors::BLACK,
-      Color fillColor = colors::NONE ) {
-        std::cout << "Construct Polyline with strokeColor " << strokeColor << std::endl;
+      Color strokeColor,
+      Color fillColor) {
+        std::cout
+          << "Construct Polyline with strokeColor " << strokeColor
+          << ", fillColor " << fillColor << std::endl;
+        Shape::strokeColor = strokeColor;
+        Shape::fillColor = fillColor;
     }
 
     virtual void show() override { }
